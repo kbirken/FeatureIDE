@@ -21,6 +21,9 @@
 package de.ovgu.featureide.fm.core.io.xml;
 
 import de.ovgu.featureide.fm.core.FeatureModel;
+import de.ovgu.featureide.fm.core.configuration.Configuration;
+import de.ovgu.featureide.fm.core.configuration.ConfigurationWriter;
+import de.ovgu.featureide.fm.core.configuration.IConfigurationWriter;
 import de.ovgu.featureide.fm.core.io.AbstractFeatureModelReader;
 import de.ovgu.featureide.fm.core.io.AbstractFeatureModelWriter;
 import de.ovgu.featureide.fm.core.io.IFeatureModelPersistency;
@@ -46,6 +49,14 @@ public class XmlFeatureModelPersistency implements IFeatureModelPersistency {
 	@Override
 	public AbstractFeatureModelWriter createFeatureModelWriter(FeatureModel featureModel) {
 		return new XmlFeatureModelWriter(featureModel);
+	}
+
+	/* (non-Javadoc)
+	 * @see de.ovgu.featureide.fm.core.io.IFeatureModelPersistency#createConfigurationWriter(de.ovgu.featureide.fm.core.configuration.Configuration)
+	 */
+	@Override
+	public IConfigurationWriter createConfigurationWriter(Configuration config) {
+		return new ConfigurationWriter(config);
 	}
 
 }

@@ -72,13 +72,10 @@ import de.ovgu.featureide.fm.core.FMCorePlugin;
 import de.ovgu.featureide.fm.core.FeatureModel;
 import de.ovgu.featureide.fm.core.FeatureModelFile;
 import de.ovgu.featureide.fm.core.PropertyConstants;
-import de.ovgu.featureide.fm.core.io.FeatureModelReaderIFileWrapper;
-import de.ovgu.featureide.fm.core.io.FeatureModelWriterIFileWrapper;
 import de.ovgu.featureide.fm.core.io.IFeatureModelReader;
 import de.ovgu.featureide.fm.core.io.IFeatureModelWriter;
+import de.ovgu.featureide.fm.core.io.PersistencyFactory;
 import de.ovgu.featureide.fm.core.io.guidsl.GuidslWriter;
-import de.ovgu.featureide.fm.core.io.xml.XmlFeatureModelReader;
-import de.ovgu.featureide.fm.core.io.xml.XmlFeatureModelWriter;
 import de.ovgu.featureide.fm.ui.FMUIPlugin;
 import de.ovgu.featureide.fm.ui.editors.configuration.ConfigurationEditor;
 import de.ovgu.featureide.fm.ui.editors.featuremodel.FeatureModelEditorContributor;
@@ -148,13 +145,13 @@ public class FeatureModelEditor extends MultiPageEditorPart implements
 
 		featureModel = new FeatureModel();
 
-		featureModelReader = new XmlFeatureModelReader(featureModel);
-		featureModelWriter = new XmlFeatureModelWriter(featureModel);
+		featureModelReader = PersistencyFactory.createFeatureModelReader(featureModel);
+		featureModelWriter = PersistencyFactory.createFeatureModelWriter(featureModel);
 
 		originalFeatureModel = new FeatureModel();
 		try {
-	    	new FeatureModelReaderIFileWrapper(new XmlFeatureModelReader(originalFeatureModel)).readFromFile(file);
-	    	new FeatureModelReaderIFileWrapper(new XmlFeatureModelReader(featureModel)).readFromFile(file);
+			PersistencyFactory.createIFileFeatureModelReader(originalFeatureModel).readFromFile(file);
+			PersistencyFactory.createIFileFeatureModelReader(featureModel).readFromFile(file);
 		} catch (Exception e) {
 			FMUIPlugin.getDefault().logError(e);
 		}
@@ -444,7 +441,7 @@ public class FeatureModelEditor extends MultiPageEditorPart implements
 			textEditor.doSave(monitor);
 		} else {
 			try {
-				new FeatureModelWriterIFileWrapper(new XmlFeatureModelWriter(featureModel)).writeToFile(getModelFile());
+				PersistencyFactory.createIFileFeatureModelWriter(featureModel).writeToFile(getModelFile());
 			} catch (CoreException e) {
 				FMUIPlugin.getDefault().logError(e);
 			}
@@ -452,7 +449,7 @@ public class FeatureModelEditor extends MultiPageEditorPart implements
 
 		// set originalFeatureModel
 		try {
-			new FeatureModelReaderIFileWrapper(new XmlFeatureModelReader(originalFeatureModel))
+			PersistencyFactory.createIFileFeatureModelReader(originalFeatureModel)
 				.readFromFile(fmFile.getResource());
 		} catch (Exception e) {
 			FMUIPlugin.getDefault().logError(e);

@@ -26,7 +26,7 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.texteditor.IDocumentProvider;
 
-import de.ovgu.featureide.fm.core.configuration.ConfigurationWriter;
+import de.ovgu.featureide.fm.core.io.PersistencyFactory;
 import de.ovgu.featureide.fm.ui.FMUIPlugin;
 
 /**
@@ -91,8 +91,8 @@ public class TextEditorPage extends TextEditor implements IConfigurationEditorPa
 	
 			return;
 		}
-		String source = new ConfigurationWriter(configurationEditor.configuration)
-				.writeIntoString(configurationEditor.file);
+		String source = PersistencyFactory.createConfigurationWriter(configurationEditor.configuration)
+				.writeToString();
 		IDocumentProvider provider = getDocumentProvider();
 		IDocument document = provider
 				.getDocument(getEditorInput());

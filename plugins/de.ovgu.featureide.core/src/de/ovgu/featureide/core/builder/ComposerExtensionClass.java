@@ -50,7 +50,8 @@ import de.ovgu.featureide.core.IFeatureProject;
 import de.ovgu.featureide.core.fstmodel.preprocessor.FSTDirective;
 import de.ovgu.featureide.fm.core.Feature;
 import de.ovgu.featureide.fm.core.configuration.Configuration;
-import de.ovgu.featureide.fm.core.configuration.ConfigurationWriter;
+import de.ovgu.featureide.fm.core.configuration.IConfigurationWriter;
+import de.ovgu.featureide.fm.core.io.PersistencyFactory;
 
 /**
  * Abstract class for FeatureIDE composer extensions with default values.
@@ -289,7 +290,7 @@ public abstract class ComposerExtensionClass implements IComposerExtensionClass 
 				folder.create(true, false, null);
 			}
 			IFile configurationFile = folder.getFile(congurationName + "." + getConfigurationExtension());
-			ConfigurationWriter writer = new ConfigurationWriter(configuration);
+			IConfigurationWriter writer = PersistencyFactory.createConfigurationWriter(configuration);
 			writer.saveToFile(configurationFile);
 			copyNotComposedFiles(configuration, folder);
 		} catch (CoreException e) {

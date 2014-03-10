@@ -71,9 +71,9 @@ import de.ovgu.featureide.fm.core.FeatureModel;
 import de.ovgu.featureide.fm.core.PropertyConstants;
 import de.ovgu.featureide.fm.core.configuration.Configuration;
 import de.ovgu.featureide.fm.core.configuration.ConfigurationReader;
-import de.ovgu.featureide.fm.core.configuration.ConfigurationWriter;
 import de.ovgu.featureide.fm.core.configuration.SelectableFeature;
 import de.ovgu.featureide.fm.core.configuration.Selection;
+import de.ovgu.featureide.fm.core.io.PersistencyFactory;
 import de.ovgu.featureide.fm.core.io.UnsupportedModelException;
 import de.ovgu.featureide.fm.core.io.xml.XmlFeatureModelReader;
 import de.ovgu.featureide.fm.ui.FMUIPlugin;
@@ -403,7 +403,7 @@ public class ConfigurationEditor extends MultiPageEditorPart implements
 
 	private void setConfiguration() {
 		readFeatureModel();
-		String text = new ConfigurationWriter(configuration).writeIntoString(file);
+		String text = PersistencyFactory.createConfigurationWriter(configuration).writeToString();
 		configuration = new Configuration(featureModel, true);
 		try {
 			new ConfigurationReader(configuration).readFromString(text);
@@ -498,7 +498,7 @@ public class ConfigurationEditor extends MultiPageEditorPart implements
 			IDocument document = provider.getDocument(sourceEditor
 					.getEditorInput());
 			String text = document.get();
-			if (!new ConfigurationWriter(configuration).writeIntoString(file)
+			if (! PersistencyFactory.createConfigurationWriter(configuration).writeToString()
 					.equals(text)) {
 				configuration = new Configuration(featureModel, true);
 				try {
@@ -576,7 +576,7 @@ public class ConfigurationEditor extends MultiPageEditorPart implements
 	@Override
 	public void doSave(IProgressMonitor monitor) {
 		try {
-			new ConfigurationWriter(configuration).saveToFile(file);
+			PersistencyFactory.createConfigurationWriter(configuration).saveToFile(file);
 			firePropertyChange(IEditorPart.PROP_DIRTY);
 			isPageModified = false;
 		} catch (CoreException e) {
