@@ -35,7 +35,8 @@ import de.ovgu.featureide.fm.core.AbstractCorePlugin;
 import de.ovgu.featureide.fm.core.FMCorePlugin;
 import de.ovgu.featureide.fm.core.FeatureModel;
 import de.ovgu.featureide.fm.core.configuration.Configuration;
-import de.ovgu.featureide.fm.core.configuration.ConfigurationWriter;
+import de.ovgu.featureide.fm.core.configuration.IConfigurationWriter;
+import de.ovgu.featureide.fm.core.io.PersistencyFactory;
 
 /**
  * Default implementation for quick fix of missing configurations.
@@ -81,7 +82,8 @@ public abstract class QuickFixMissingConfigurations implements IMarkerResolution
 		try {
 			configurationNr = 0;
 			for (final Configuration c : confs) {
-				final ConfigurationWriter writer = new ConfigurationWriter(c);
+				final IConfigurationWriter writer =
+						PersistencyFactory.createConfigurationWriter(c);
 				writer.saveToFile(getConfigurationFile(project.getConfigFolder()));
 			}
 			project.getConfigFolder().refreshLocal(IResource.DEPTH_ONE, null);

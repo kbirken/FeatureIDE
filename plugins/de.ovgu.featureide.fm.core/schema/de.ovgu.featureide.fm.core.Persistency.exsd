@@ -1,9 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <!-- Schema file written by PDE -->
-<schema targetNamespace="de.ovgu.featureide.fm.ui" xmlns="http://www.w3.org/2001/XMLSchema">
+<schema targetNamespace="de.ovgu.featureide.fm.core" xmlns="http://www.w3.org/2001/XMLSchema">
 <annotation>
       <appInfo>
-         <meta.schema plugin="de.ovgu.featureide.fm.ui" id="de.ovgu.featureide.fm.ui.Persistency" name="Feature Model Persistency"/>
+         <meta.schema plugin="de.ovgu.featureide.fm.core" id="de.ovgu.featureide.fm.core.Persistency" name="Feature Model Persistency"/>
       </appInfo>
       <documentation>
          The extension point can be used to define an alternate persistent format or storage for feature and configuration models.

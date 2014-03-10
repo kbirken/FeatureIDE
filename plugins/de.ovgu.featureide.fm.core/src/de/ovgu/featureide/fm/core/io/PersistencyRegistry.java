@@ -1,4 +1,4 @@
-package de.ovgu.featureide.fm.ui.persistency;
+package de.ovgu.featureide.fm.core.io;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +28,7 @@ import de.ovgu.featureide.fm.core.io.xml.XmlFeatureModelPersistency;
  */
 public class PersistencyRegistry {
 
-	private static final String EXTENSION_POINT_ID = "de.ovgu.featureide.fm.ui.Persistency";
+	private static final String EXTENSION_POINT_ID = "de.ovgu.featureide.fm.core.Persistency";
 
 	private static IFeatureModelPersistency actualPersistency = null;
 

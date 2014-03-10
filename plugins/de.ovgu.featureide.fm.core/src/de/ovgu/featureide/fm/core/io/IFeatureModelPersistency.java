@@ -21,6 +21,8 @@
 package de.ovgu.featureide.fm.core.io;
 
 import de.ovgu.featureide.fm.core.FeatureModel;
+import de.ovgu.featureide.fm.core.configuration.Configuration;
+import de.ovgu.featureide.fm.core.configuration.IConfigurationWriter;
 
 /**
  * The interface for defining a persistency layer for feature models.
@@ -49,4 +51,13 @@ public interface IFeatureModelPersistency {
 	 */
 	public AbstractFeatureModelWriter createFeatureModelWriter(FeatureModel featureModel); 
 
+	/**
+	 * Factory function which provides a specific writer for configurations.
+	 * 
+	 * @param config the configuration which should be stored persistently
+	 * @return the actual writer
+	 */
+	public IConfigurationWriter createConfigurationWriter(Configuration config); 
+
+	
 }

@@ -18,9 +18,11 @@
  *
  * See http://www.fosd.de/featureide/ for further information.
  */
-package de.ovgu.featureide.fm.ui.persistency;
+package de.ovgu.featureide.fm.core.io;
 
 import de.ovgu.featureide.fm.core.FeatureModel;
+import de.ovgu.featureide.fm.core.configuration.Configuration;
+import de.ovgu.featureide.fm.core.configuration.IConfigurationWriter;
 import de.ovgu.featureide.fm.core.io.AbstractFeatureModelReader;
 import de.ovgu.featureide.fm.core.io.AbstractFeatureModelWriter;
 import de.ovgu.featureide.fm.core.io.FeatureModelReaderIFileWrapper;
@@ -37,7 +39,7 @@ import de.ovgu.featureide.fm.core.io.IFeatureModelPersistency;
 public class PersistencyFactory {
 
 	/**
-	 * Create a standard model reader.
+	 * Create a standard feature model reader.
 	 * 
 	 * @param featureModel the feature model which receives the loaded data.
 	 * @return the reader
@@ -48,7 +50,7 @@ public class PersistencyFactory {
 	}
 
 	/**
-	 * Create a standard model writer.
+	 * Create a standard feature model writer.
 	 * 
 	 * @param featureModel the feature model which will be stored.
 	 * @return the writer
@@ -59,7 +61,7 @@ public class PersistencyFactory {
 	}
 
 	/**
-	 * Create a model reader which is also capable of reading from an IFile.
+	 * Create a feature model reader which is also capable of reading from an IFile.
 	 * 
 	 * @param featureModel the feature model which receives the loaded data.
 	 * @return the reader
@@ -71,7 +73,7 @@ public class PersistencyFactory {
 	}
 
 	/**
-	 * Create a model writer which is also capable of writing to an IFile.
+	 * Create a feature model writer which is also capable of writing to an IFile.
 	 * 
 	 * @param featureModel the feature model which will be stored.
 	 * @return the writer
@@ -82,4 +84,15 @@ public class PersistencyFactory {
 		return new FeatureModelWriterIFileWrapper(writer);
 	}
 	
+	/**
+	 * Create a standard configuration writer.
+	 * 
+	 * @param config the configuration which will be stored.
+	 * @return the writer
+	 */
+	public static IConfigurationWriter createConfigurationWriter (Configuration config) {
+		IFeatureModelPersistency persistency = PersistencyRegistry.getPersistency();
+		return persistency.createConfigurationWriter(config);
+	}
+
 }

@@ -21,6 +21,7 @@
 package de.ovgu.featureide.fm.core.configuration;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.List;
@@ -35,7 +36,7 @@ import de.ovgu.featureide.fm.core.FeatureModel;
 /**
  * Writes a configuration into a file or String.
  */
-public class ConfigurationWriter {
+public class ConfigurationWriter implements IConfigurationWriter {
 
 	private Configuration configuration;
 
@@ -44,11 +45,14 @@ public class ConfigurationWriter {
 	}
 
 	public ConfigurationWriter() {
-
 	}
 
+	/* (non-Javadoc)
+	 * @see de.ovgu.featureide.fm.core.configuration.IConfigurationWriter#saveToFile(org.eclipse.core.resources.IFile)
+	 */
+	@Override
 	public void saveToFile(IFile file) throws CoreException {
-		InputStream source = new ByteArrayInputStream(writeIntoString(file)
+		InputStream source = new ByteArrayInputStream(writeToString()
 				.getBytes(Charset.availableCharsets().get("UTF-8")));
 
 		if (file.exists()) {
@@ -58,7 +62,11 @@ public class ConfigurationWriter {
 		}
 	}
 
-	public String writeIntoString(IFile file) {
+	/* (non-Javadoc)
+	 * @see de.ovgu.featureide.fm.core.configuration.IConfigurationWriter#writeToString()
+	 */
+	@Override
+	public String writeToString() {
 		StringBuilder buffer = new StringBuilder();
 		FeatureModel featureModel = configuration.getFeatureModel();
 		List<String> list = featureModel.getFeatureOrderList();
