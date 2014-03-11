@@ -56,8 +56,9 @@ import de.ovgu.featureide.core.builder.IComposerExtensionClass;
 import de.ovgu.featureide.fm.core.Feature;
 import de.ovgu.featureide.fm.core.FeatureModel;
 import de.ovgu.featureide.fm.core.configuration.Configuration;
-import de.ovgu.featureide.fm.core.configuration.ConfigurationReader;
+import de.ovgu.featureide.fm.core.configuration.IConfigurationReader;
 import de.ovgu.featureide.fm.core.io.FeatureModelWriterIFileWrapper;
+import de.ovgu.featureide.fm.core.io.PersistencyFactory;
 import de.ovgu.featureide.fm.core.io.xml.XmlFeatureModelWriter;
 
 /**
@@ -114,7 +115,7 @@ public class AspectJComposer extends ComposerExtensionClass {
 			return;
 		
 		Configuration configuration = new Configuration(featureProject.getFeatureModel());
-		ConfigurationReader reader = new ConfigurationReader(configuration);
+		IConfigurationReader reader = PersistencyFactory.createConfigurationReader(configuration);
 		
 		try {
 			reader.readFromFile(config);

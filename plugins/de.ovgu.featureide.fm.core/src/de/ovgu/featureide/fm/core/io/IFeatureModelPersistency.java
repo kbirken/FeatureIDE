@@ -22,6 +22,7 @@ package de.ovgu.featureide.fm.core.io;
 
 import de.ovgu.featureide.fm.core.FeatureModel;
 import de.ovgu.featureide.fm.core.configuration.Configuration;
+import de.ovgu.featureide.fm.core.configuration.IConfigurationReader;
 import de.ovgu.featureide.fm.core.configuration.IConfigurationWriter;
 
 /**
@@ -50,6 +51,14 @@ public interface IFeatureModelPersistency {
 	 * @return the actual writer
 	 */
 	public AbstractFeatureModelWriter createFeatureModelWriter(FeatureModel featureModel); 
+
+	/**
+	 * Factory function which provides a specific reader for configurations.
+	 * 
+	 * @param config the configuration which should will contain the data after reading
+	 * @return the actual reader
+	 */
+	public IConfigurationReader createConfigurationReader(Configuration config); 
 
 	/**
 	 * Factory function which provides a specific writer for configurations.

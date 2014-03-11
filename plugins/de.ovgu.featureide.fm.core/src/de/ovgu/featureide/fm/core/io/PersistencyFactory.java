@@ -22,12 +22,8 @@ package de.ovgu.featureide.fm.core.io;
 
 import de.ovgu.featureide.fm.core.FeatureModel;
 import de.ovgu.featureide.fm.core.configuration.Configuration;
+import de.ovgu.featureide.fm.core.configuration.IConfigurationReader;
 import de.ovgu.featureide.fm.core.configuration.IConfigurationWriter;
-import de.ovgu.featureide.fm.core.io.AbstractFeatureModelReader;
-import de.ovgu.featureide.fm.core.io.AbstractFeatureModelWriter;
-import de.ovgu.featureide.fm.core.io.FeatureModelReaderIFileWrapper;
-import de.ovgu.featureide.fm.core.io.FeatureModelWriterIFileWrapper;
-import de.ovgu.featureide.fm.core.io.IFeatureModelPersistency;
 
 /**
  * A helper class which can be used to create various readers and writers for feature models.
@@ -84,6 +80,17 @@ public class PersistencyFactory {
 		return new FeatureModelWriterIFileWrapper(writer);
 	}
 	
+	/**
+	 * Create a standard configuration reader.
+	 * 
+	 * @param config the configuration which receives the loaded data.
+	 * @return the reader
+	 */
+	public static IConfigurationReader createConfigurationReader (Configuration config) {
+		IFeatureModelPersistency persistency = PersistencyRegistry.getPersistency();
+		return persistency.createConfigurationReader(config);
+	}
+
 	/**
 	 * Create a standard configuration writer.
 	 * 
