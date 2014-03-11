@@ -35,7 +35,8 @@ import de.ovgu.featureide.core.CorePlugin;
 import de.ovgu.featureide.core.IFeatureProject;
 import de.ovgu.featureide.fm.core.FeatureModel;
 import de.ovgu.featureide.fm.core.configuration.Configuration;
-import de.ovgu.featureide.fm.core.configuration.ConfigurationReader;
+import de.ovgu.featureide.fm.core.configuration.IConfigurationReader;
+import de.ovgu.featureide.fm.core.io.PersistencyFactory;
 
 
 /**
@@ -186,7 +187,7 @@ public class ExtensibleFeatureProjectBuilder extends IncrementalProjectBuilder {
 			CorePlugin.getDefault().logError(e);
 		}
 		Configuration c = new Configuration(featureModel);
-		ConfigurationReader reader = new ConfigurationReader(c);
+		IConfigurationReader reader = PersistencyFactory.createConfigurationReader(c);
 		try {
 			reader.readFromFile(configFile);
 		} catch (Exception e) {

@@ -63,9 +63,10 @@ import de.ovgu.featureide.fm.core.Feature;
 import de.ovgu.featureide.fm.core.FeatureModel;
 import de.ovgu.featureide.fm.core.StoppableJob;
 import de.ovgu.featureide.fm.core.configuration.Configuration;
-import de.ovgu.featureide.fm.core.configuration.ConfigurationReader;
+import de.ovgu.featureide.fm.core.configuration.IConfigurationReader;
 import de.ovgu.featureide.fm.core.configuration.Selection;
 import de.ovgu.featureide.fm.core.editing.NodeCreator;
+import de.ovgu.featureide.fm.core.io.PersistencyFactory;
 import de.ovgu.featureide.ui.UIPlugin;
 
 /**
@@ -86,10 +87,10 @@ public class ConfigurationBuilder implements IConfigurationBuilderBasics {
 	IFolder folder;
 	
 	/**
-	 * This is the configuration where the {@link ConfigurationReader} saves the read configuration.
+	 * This is the configuration where the {@link IConfigurationReader} saves the read configuration.
 	 */
 	private Configuration configuration;
-	private ConfigurationReader reader;
+	private IConfigurationReader reader;
 	
 	/**
 	 * The count of found configurations.
@@ -366,7 +367,7 @@ public class ConfigurationBuilder implements IConfigurationBuilderBasics {
 		confs = 1;
 		
 		configuration = new Configuration(featureModel);
-		reader = new ConfigurationReader(configuration);
+		reader = PersistencyFactory.createConfigurationReader(configuration);
 		featureProject.getComposer().initialize(featureProject);
 		
 		if (!createNewProjects) {

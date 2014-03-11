@@ -42,7 +42,7 @@ import de.ovgu.featureide.fm.core.Feature;
 /**
  * Reads a configuration from file or String.
  */
-public class ConfigurationReader {
+public class ConfigurationReader implements IConfigurationReader {
 
 	private Configuration configuration;
 
@@ -53,6 +53,10 @@ public class ConfigurationReader {
 		this.configuration = configuration;
 	}
 
+	/* (non-Javadoc)
+	 * @see de.ovgu.featureide.fm.core.configuration.IConfigurationReader#readFromFile(org.eclipse.core.resources.IFile)
+	 */
+	@Override
 	public boolean readFromFile(IFile file) throws CoreException, IOException {
 		String fileName = file.getRawLocation().toOSString();
 		InputStream inputStream = new FileInputStream(fileName);
@@ -63,6 +67,10 @@ public class ConfigurationReader {
 		}
 	}
 
+	/* (non-Javadoc)
+	 * @see de.ovgu.featureide.fm.core.configuration.IConfigurationReader#readFromString(String)
+	 */
+	@Override
 	public boolean readFromString(String text) {
 		InputStream inputStream = null;
 		try {
@@ -190,10 +198,18 @@ public class ConfigurationReader {
 		return successful;
 	}
 
+	/* (non-Javadoc)
+	 * @see de.ovgu.featureide.fm.core.configuration.IConfigurationReader#getWarnings()
+	 */
+	@Override
 	public List<String> getWarnings() {
 		return Collections.unmodifiableList(warnings);
 	}
 
+	/* (non-Javadoc)
+	 * @see de.ovgu.featureide.fm.core.configuration.IConfigurationReader#getPositions()
+	 */
+	@Override
 	public List<Integer> getPositions() {
 		return Collections.unmodifiableList(positions);
 	}

@@ -71,10 +71,11 @@ import de.ovgu.featureide.fm.core.PropertyConstants;
 import de.ovgu.featureide.fm.core.StoppableJob;
 import de.ovgu.featureide.fm.core.WaitingJob;
 import de.ovgu.featureide.fm.core.configuration.Configuration;
-import de.ovgu.featureide.fm.core.configuration.ConfigurationReader;
+import de.ovgu.featureide.fm.core.configuration.IConfigurationReader;
 import de.ovgu.featureide.fm.core.configuration.FeatureOrderReader;
 import de.ovgu.featureide.fm.core.io.FeatureModelReaderIFileWrapper;
 import de.ovgu.featureide.fm.core.io.FeatureModelWriterIFileWrapper;
+import de.ovgu.featureide.fm.core.io.PersistencyFactory;
 import de.ovgu.featureide.fm.core.io.UnsupportedModelException;
 import de.ovgu.featureide.fm.core.io.guidsl.GuidslReader;
 import de.ovgu.featureide.fm.core.io.xml.XmlFeatureModelReader;
@@ -1029,8 +1030,8 @@ public class FeatureProject extends BuilderMarkerHandler implements
 				Configuration config = new Configuration(featureModel, true);
 				// Configuration autoConfig = new Configuration(featureModel,
 				// true);
-				ConfigurationReader reader = new ConfigurationReader(config);
-				// ConfigurationReader autoReader = new ConfigurationReader(
+				IConfigurationReader reader = PersistencyFactory.createConfigurationReader(config);
+				// IConfigurationReader autoReader = PersistencyFactory.createConfigurationReader(
 				// autoConfig);
 				try {
 					monitor.subTask("Delete Configuration Markers");

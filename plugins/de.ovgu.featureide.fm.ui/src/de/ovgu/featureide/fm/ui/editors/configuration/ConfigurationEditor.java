@@ -70,7 +70,6 @@ import de.ovgu.featureide.fm.core.Feature;
 import de.ovgu.featureide.fm.core.FeatureModel;
 import de.ovgu.featureide.fm.core.PropertyConstants;
 import de.ovgu.featureide.fm.core.configuration.Configuration;
-import de.ovgu.featureide.fm.core.configuration.ConfigurationReader;
 import de.ovgu.featureide.fm.core.configuration.SelectableFeature;
 import de.ovgu.featureide.fm.core.configuration.Selection;
 import de.ovgu.featureide.fm.core.io.PersistencyFactory;
@@ -200,7 +199,7 @@ public class ConfigurationEditor extends MultiPageEditorPart implements
 		readFeatureModel();
 		configuration = new Configuration(featureModel, true);
 		try {
-			new ConfigurationReader(configuration).readFromFile(file);
+			PersistencyFactory.createConfigurationReader(configuration).readFromFile(file);
 			isPageModified = isModified(file);
 		} catch (Exception e) {
 			FMCorePlugin.getDefault().logError(e);
@@ -395,7 +394,7 @@ public class ConfigurationEditor extends MultiPageEditorPart implements
 		readFeatureModel();
 		configuration = new Configuration(featureModel, true);
 		try {
-			new ConfigurationReader(configuration).readFromFile(file);
+			PersistencyFactory.createConfigurationReader(configuration).readFromFile(file);
 		} catch (Exception e) {
 			FMCorePlugin.getDefault().logError(e);
 		}
@@ -406,7 +405,7 @@ public class ConfigurationEditor extends MultiPageEditorPart implements
 		String text = PersistencyFactory.createConfigurationWriter(configuration).writeToString();
 		configuration = new Configuration(featureModel, true);
 		try {
-			new ConfigurationReader(configuration).readFromString(text);
+			PersistencyFactory.createConfigurationReader(configuration).readFromString(text);
 		} catch (Exception e) {
 			FMCorePlugin.getDefault().logError(e);
 		}
@@ -502,7 +501,7 @@ public class ConfigurationEditor extends MultiPageEditorPart implements
 					.equals(text)) {
 				configuration = new Configuration(featureModel, true);
 				try {
-					new ConfigurationReader(configuration)
+					PersistencyFactory.createConfigurationReader(configuration)
 							.readFromString(text);
 				} catch (Exception e) {
 					FMCorePlugin.getDefault().logError(e);
