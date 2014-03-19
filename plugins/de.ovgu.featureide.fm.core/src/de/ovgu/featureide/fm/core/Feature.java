@@ -525,7 +525,7 @@ public class Feature implements PropertyConstants, PropertyChangeListener {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Feature clone() {
-		Feature feature = new Feature(featureModel, name);
+		Feature feature = FeatureFactoryRegistry.getFactory().createFeature(featureModel, name);
 		for (Feature child : (LinkedList<Feature>) children.clone()) {
 			feature.addChild(child.clone());
 		}

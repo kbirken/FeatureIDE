@@ -174,7 +174,7 @@ public class FeatureModel extends DeprecatedFeatureModel implements PropertyCons
 			root = getFeature("Root");
 		}
 		root.setAbstract(true);
-		Feature feature = new Feature(this, "Base");
+		Feature feature = FeatureFactoryRegistry.getFactory().createFeature(this, "Base");
 		root.addChild(feature);
 		addFeature(feature);
 	}
@@ -244,7 +244,7 @@ public class FeatureModel extends DeprecatedFeatureModel implements PropertyCons
 	public Feature getFeature(String name) {
 		if (featureTable.isEmpty()) {
 			// create the root feature (it is the only one without a reference)
-			rootFeature = new Feature(this, name);
+			rootFeature = FeatureFactoryRegistry.getFactory().createFeature(this, name);
 			addFeature(rootFeature);
 			return rootFeature;
 		}
@@ -501,7 +501,7 @@ public class FeatureModel extends DeprecatedFeatureModel implements PropertyCons
 		final FeatureModel clone = new FeatureModel();
 		clone.featureTable.putAll(featureTable);
 		if (rootFeature == null) {
-			clone.rootFeature = new Feature(clone, "Root");
+			clone.rootFeature = FeatureFactoryRegistry.getFactory().createFeature(clone, "Root");
 			clone.featureTable.put("root", clone.rootFeature);
 		} else {
 			// TODO this should never happen
