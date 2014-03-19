@@ -3,4 +3,5 @@
 <plugin>
    <extension-point id="FMComposer" name="fmComposer" schema="schema/fmComposer.exsd"/>
    <extension-point id="de.ovgu.featureide.fm.core.Persistency" name="PersistencyExtension" schema="schema/de.ovgu.featureide.fm.core.Persistency.exsd"/>
+   <extension-point id="de.ovgu.featureide.fm.core.FeatureFactory" name="FeatureFactoryExtension" schema="schema/de.ovgu.featureide.fm.core.FeatureFactory.exsd"/>
 </plugin>
