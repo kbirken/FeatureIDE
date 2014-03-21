@@ -31,6 +31,7 @@ import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TextCellEditor;
 
 import de.ovgu.featureide.fm.core.Feature;
+import de.ovgu.featureide.fm.core.FeatureFactoryRegistry;
 import de.ovgu.featureide.fm.core.FeatureModel;
 import de.ovgu.featureide.fm.ui.editors.featuremodel.commands.renaming.FeatureCellEditorLocator;
 import de.ovgu.featureide.fm.ui.editors.featuremodel.commands.renaming.FeatureLabelEditManager;
@@ -72,7 +73,7 @@ public class FeatureCreateLayerOperation extends AbstractFeatureModelOperation {
 
 		while (featureModel.getFeatureNames().contains("NewLayer" + ++number));
 		
-		newFeature = new Feature(featureModel, "NewLayer" + number);
+		newFeature = FeatureFactoryRegistry.getFactory().createFeature(featureModel, "NewLayer" + number);
 		featureModel.addFeature(newFeature);
 		feature = featureModel.getFeature(feature.getName());
 		feature.addChild(newFeature);
