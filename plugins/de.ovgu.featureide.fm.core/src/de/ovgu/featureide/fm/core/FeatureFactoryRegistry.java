@@ -10,9 +10,6 @@ import org.eclipse.core.runtime.IExtensionPoint;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
 
-import de.ovgu.featureide.fm.core.io.IFeatureModelPersistency;
-import de.ovgu.featureide.fm.core.io.xml.XmlFeatureModelPersistency;
-
 
 /**
  * The registry for configurable feature factory providers.
