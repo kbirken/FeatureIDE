@@ -32,6 +32,7 @@ import org.eclipse.draw2d.geometry.Rectangle;
 import de.ovgu.featureide.fm.core.Feature;
 import de.ovgu.featureide.fm.core.FeatureModel;
 import de.ovgu.featureide.fm.core.FeatureStatus;
+import de.ovgu.featureide.fm.core.IFeature;
 import de.ovgu.featureide.fm.ui.editors.FeatureDiagramExtension;
 import de.ovgu.featureide.fm.ui.editors.FeatureUIHelper;
 import de.ovgu.featureide.fm.ui.editors.featuremodel.GUIDefaults;
@@ -54,7 +55,7 @@ public class FeatureFigure extends Figure implements GUIDefaults {
 	
 	private final ConnectionAnchor targetAnchor;
 
-	private Feature feature;
+	private IFeature feature;
 
 	private FeatureModel featureModel;
 	
@@ -85,7 +86,7 @@ public class FeatureFigure extends Figure implements GUIDefaults {
 
 		label.setLocation(new Point(FEATURE_INSETS.left, FEATURE_INSETS.top));
 		
-		setName(feature.getName());
+		setName(feature.getVisibleName());
 
 		setProperties();
 		
@@ -233,7 +234,7 @@ public class FeatureFigure extends Figure implements GUIDefaults {
 	/**
 	 * @return The <code>Feature</code> represented by this <code>FeatureFigure</code>
 	 */
-	public Feature getFeature() {
+	public IFeature getFeature() {
 		return feature;
 	}
 }

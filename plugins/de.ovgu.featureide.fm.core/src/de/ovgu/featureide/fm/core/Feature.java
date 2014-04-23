@@ -37,7 +37,7 @@ import org.prop4j.NodeWriter;
  * @author Thomas Thuem
  * 
  */
-public class Feature implements PropertyConstants, PropertyChangeListener {
+public class Feature implements IFeature, PropertyConstants, PropertyChangeListener {
 
 	private String name;
 
@@ -230,8 +230,28 @@ public class Feature implements PropertyConstants, PropertyChangeListener {
 		fireChildrenChanged();
 	}
 
+	/* (non-Javadoc)
+	 * @see de.ovgu.featureide.fm.core.IFeature#getName()
+	 */
+	@Override
 	public String getName() {
 		return name;
+	}
+
+	/* (non-Javadoc)
+	 * @see de.ovgu.featureide.fm.core.IFeature#getVisibleName()
+	 */
+	@Override
+	public String getVisibleName() {
+		return name;
+	}
+
+	/* (non-Javadoc)
+	 * @see de.ovgu.featureide.fm.core.IFeature#computeNameFromVisibleName(java.lang.String)
+	 */
+	@Override
+	public String computeNameFromVisibleName(String visible) {
+		return visible;
 	}
 
 	public void setName(String name) {
