@@ -96,4 +96,24 @@ public class FeatureFactoryRegistry {
 			}
 		}
 	}
+	
+	/**
+	 * Explicitly set the FeatureFactory to be used (for tests only).
+	 * 
+	 * This should be used for standalone unit tests only (when no Eclipse platform is available).
+	 * 
+	 * @param factory the FeatureFactory to be used
+	 * @return true on sucess
+	 */
+	public static boolean setFeatureFactory(IFeatureFactory factory) {
+		if (actualFactory==null) {
+			actualFactory = factory;
+			return true;
+		} else {
+			System.err.println(
+				"Error: Cannot set feature factory, already set to " +
+			actualFactory.toString());
+			return false;
+		}
+	}
 }
